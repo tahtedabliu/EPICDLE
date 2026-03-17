@@ -7,7 +7,6 @@ const personagens=[
 {nome:"Aquiles",status:"morto",especie:"semideus",genero:"masculino",pseudonimo:"Rei, herói",saga:"Troy Saga",imagem:"imagens/aquiles.png"},
 {nome:"Pátroclo",status:"morto",especie:"humano",genero:"masculino",pseudonimo:"Soldado",saga:"Troy Saga",imagem:"imagens/patroclo.png"},
 {nome:"Hector",status:"morto",especie:"humano",genero:"masculino",pseudonimo:"Rei, herói",saga:"Troy Saga",imagem:"imagens/hector.png"},
-{nome:"Ájax, o Grande",status:"morto",especie:"humano",genero:"masculino",pseudonimo:"Soldado",saga:"Troy Saga",imagem:"imagens/ajax.png"},
 {nome:"Ájax, o Menor",status:"morto",especie:"humano",genero:"masculino",pseudonimo:"Soldado",saga:"Troy Saga",imagem:"imagens/ajax.png"},
 
   
