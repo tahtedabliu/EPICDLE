@@ -56,42 +56,19 @@ const personagens=[
 
 {nome:"Astianax",status:"morto",especie:"humano",genero:"masculino",pseudonimo:"Príncipe",saga:"Troy Saga",imagem:"imagens/astianax.png"}
 ]
-function personagemDoDia(){
 
-let hoje=new Date()
-
-let numero=
-hoje.getFullYear()*10000+
-(hoje.getMonth()+1)*100+
-hoje.getDate()
-
-return personagens[numero%personagens.length]
-
+function limparSugestoes(){
+document.getElementById("sugestoes").innerHTML=""
+selecionadoIndex=-1
 }
 
-let resposta=personagemDoDia()
-
-let tentativas=0
-
-let usados=[]
-
-let input=document.getElementById("guess")
-
-input.addEventListener("keydown",function(e){
-input.addEventListener("input", mostrarSugestoes)
-
-if(e.key==="Enter"){
-verificar()
-input.value=""
-}
-
-})
-
-let imagem=document.getElementById("imagem")
-
-imagem.src=resposta.imagem
-
+// ================= VERIFICAR =================
 function verificar(){
+
+if(jogoFinalizado){
+mostrarMensagem("O jogo já terminou!")
+return
+}
 
 let nome=input.value.trim()
 
@@ -100,71 +77,33 @@ p.nome.toLowerCase()===nome.toLowerCase()
 )
 
 if(!tentativa){
-
-alert("Personagem não encontrado")
+mostrarMensagem("Personagem não encontrado")
 return
-
 }
 
 if(usados.includes(tentativa.nome)){
-
-alert("Você já tentou esse personagem!")
-
+mostrarMensagem("Você já tentou esse personagem!")
 return
-
 }
 
 usados.push(tentativa.nome)
-
 tentativas++
 
 document.getElementById("tentativas").innerText="Tentativas: "+tentativas
 
-let tabela=document.getElementById("tabela")
-
-let linha=tabela.insertRow()
-
+let linha=document.getElementById("tabela").insertRow()
 comparar(linha,tentativa)
 
+input.value=""
+limparSugestoes()
+
 if(tentativa.nome===resposta.nome){
-
 mostrarVitoria()
-
 }
 
 }
 
-function mostrarSugestoes(){
-
-let texto=input.value.toLowerCase()
-
-let lista=personagens.filter(p=>
-p.nome.toLowerCase().includes(texto)
-)
-
-let div=document.getElementById("sugestoes")
-
-div.innerHTML=""
-
-lista.forEach(p=>{
-
-let item=document.createElement("div")
-
-item.innerText=p.nome
-
-item.onclick=()=>{
-
-input.value=p.nome
-div.innerHTML=""
-
-}
-
-div.appendChild(item)
-
-})
-
-}
-
+// ================= COMPARAÇÃO INTELIGENTE =================
 function comparar(linha,tentativa){
 
 let campos=["nome","status","especie","genero","pseudonimo","saga"]
@@ -172,18 +111,36 @@ let campos=["nome","status","especie","genero","pseudonimo","saga"]
 campos.forEach(campo=>{
 
 let celula=linha.insertCell()
-
 celula.innerText=tentativa[campo]
-
 celula.classList.add("flip")
 
-if(tentativa[campo]===resposta[campo]){
+let valorResposta = resposta[campo].toLowerCase()
+let valorTentativa = tentativa[campo].toLowerCase()
+
+// VERDE
+if(valorTentativa === valorResposta){
 
 celula.classList.add("verde")
 
 }else{
 
+// REMOVE PALAVRAS IRRELEVANTES
+let ignorar = ["de","da","do","dos","das"]
+
+let listaResposta = valorResposta.split(" ").filter(p=>!ignorar.includes(p))
+let listaTentativa = valorTentativa.split(" ").filter(p=>!ignorar.includes(p))
+
+// VERIFICA INTERSEÇÃO REAL
+let temParcial = listaTentativa.some(palavra =>
+listaResposta.includes(palavra)
+)
+
+// AMARELO OU VERMELHO
+if(temParcial){
+celula.classList.add("amarelo")
+}else{
 celula.classList.add("vermelho")
+}
 
 }
 
@@ -191,22 +148,23 @@ celula.classList.add("vermelho")
 
 }
 
+// ================= VITÓRIA =================
 function mostrarVitoria(){
 
+jogoFinalizado=true
+
 document.getElementById("vitoria").style.display="block"
-
 document.getElementById("imagemVitoria").src=resposta.imagem
-
 document.getElementById("nomeVitoria").innerText=resposta.nome
-
 document.getElementById("pseudoVitoria").innerText=resposta.pseudonimo
 
-document.getElementById("imagem").classList.remove("sombra")
+imagem.classList.remove("sombra")
 
-document.getElementById("compartilharBtn").style.display="inline-block"
+mostrarMensagem("Parabéns! Você acertou!")
 
 }
 
+// ================= COMPARTILHAR =================
 function compartilhar(){
 
 let linhas=document.querySelectorAll("#tabela tr")
@@ -217,15 +175,11 @@ linhas.forEach((linha,i)=>{
 
 if(i==0)return
 
-let celulas=linha.querySelectorAll("td")
+linha.querySelectorAll("td").forEach(c=>{
 
-celulas.forEach(c=>{
-
-if(c.classList.contains("verde")){
-texto+="🟩"
-}else{
-texto+="🟥"
-}
+if(c.classList.contains("verde")) texto+="🟩"
+else if(c.classList.contains("amarelo")) texto+="🟨"
+else texto+="🟥"
 
 })
 
@@ -234,17 +188,15 @@ texto+="\n"
 })
 
 navigator.clipboard.writeText(texto)
-
-alert("Resultado copiado!")
+mostrarMensagem("Resultado copiado!")
 
 }
 
+// ================= TIMER =================
 function atualizarTimer(){
 
 let agora=new Date()
-
 let meiaNoite=new Date()
-
 meiaNoite.setHours(24,0,0,0)
 
 let diff=meiaNoite-agora
