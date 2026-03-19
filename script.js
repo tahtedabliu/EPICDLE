@@ -219,7 +219,7 @@ celula.classList.add("verde")
 }else{
 
 // REMOVE PALAVRAS IRRELEVANTES
-let ignorar = ["de","da","do","dos","das"]
+let ignorar = ["de","da","do","dos","das","Saga"]
 
 let listaResposta = valorResposta.split(" ").filter(p=>!ignorar.includes(p))
 let listaTentativa = valorTentativa.split(" ").filter(p=>!ignorar.includes(p))
