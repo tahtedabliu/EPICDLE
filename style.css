@@ -112,7 +112,14 @@ opacity:1;
 /* ================= VITÓRIA ================= */
 #vitoria{
 display:none;
-margin-top:20px;
+margin-top:50px;
+padding:20px;
+background:#1a1a1a;
+border-radius:12px;
+width:fit-content;
+margin-left:auto;
+margin-right:auto;
+box-shadow:0 0 15px rgba(0,0,0,0.5);
 animation:aparecer 0.5s ease;
 }
 
@@ -157,4 +164,43 @@ margin-top:10px;
 margin-top:10px;
 font-size:14px;
 color:#aaa;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px){
+
+#guess{
+width:90%;
+font-size:18px;
+}
+
+#sugestoes{
+width:90%;
+}
+
+table{
+width:100%;
+border-spacing:4px;
+}
+
+td{
+min-width:70px;
+padding:6px;
+font-size:12px;
+}
+
+#tabela td:first-child{
+width:50px;
+height:50px;
+}
+
+#imagemVitoria{
+width:90px;
+}
+
+button{
+width:90%;
+font-size:16px;
+}
+
 }
