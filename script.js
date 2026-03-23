@@ -205,7 +205,7 @@ let celulaImagem = linha.insertCell()
 
 let img = document.createElement("img")
 img.src = tentativa.imagem
-img.style.width = "50px"
+img.style.width = "100px"
 img.style.borderRadius = "6px"
 
 celulaImagem.appendChild(img)
