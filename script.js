@@ -200,6 +200,17 @@ mostrarVitoria()
 // ================= COMPARAÇÃO INTELIGENTE =================
 function comparar(linha,tentativa){
 
+// 🖼️ COLUNA DA IMAGEM
+let celulaImagem = linha.insertCell()
+
+let img = document.createElement("img")
+img.src = tentativa.imagem
+img.style.width = "50px"
+img.style.borderRadius = "6px"
+
+celulaImagem.appendChild(img)
+
+// CAMPOS 
 let campos=["nome","status","especie","genero","pseudonimo","saga"]
 
 campos.forEach(campo=>{
