@@ -285,7 +285,7 @@ function compartilhar(){
 
 let linhas = document.querySelectorAll("#tabela tr")
 
-let texto = "EPICdle " + tentativas + " tentativas\n\n"
+let texto = "Acertei o personagem no epicdle em " + tentativas + " tentativas\n\n"
 
 linhas.forEach((linha,i)=>{
 
@@ -298,7 +298,7 @@ else if(c.classList.contains("amarelo")) texto+="🟨"
 else texto+="🟥"
 
 })
-
+texto = "https://tahtedabliu.github.io/Epicdle/\n\n"
 texto+="\n"
 
 })
