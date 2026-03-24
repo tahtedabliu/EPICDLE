@@ -301,6 +301,8 @@ let linhas = document.querySelectorAll("#tabela tr")
 linhas.forEach((linha,i)=>{
 if(i===0) return
 
+let nomePersonagem = linha.cells[1].innerText // 👈 pega o nome
+
 let celulas = []
 linha.querySelectorAll("td").forEach(c=>{
 celulas.push({
@@ -309,13 +311,15 @@ classe: c.className
 })
 })
 
-dados.linhas.push(celulas)
+dados.linhas.push({
+nome: nomePersonagem,
+celulas: celulas
+})
+
 })
 
 localStorage.setItem(chaveJogo, JSON.stringify(dados))
-
 }
-
 // ================= CARREGAR =================
 function carregarProgresso(){
 
@@ -333,9 +337,26 @@ document.getElementById("tentativas").innerText = "Tentativas: " + tentativas
 
 dados.linhas.forEach(linhaSalva => {
 
+let tentativa = personagens.find(p => p.nome === linhaSalva.nome)
+
 let linha = document.getElementById("tabela").insertRow()
 
-linhaSalva.forEach(celulaSalva => {
+// 🖼️ recria imagem corretamente
+let celulaImagem = linha.insertCell()
+
+let img = document.createElement("img")
+img.src = tentativa.imagemTentativa
+
+img.onerror = () => {
+img.src = "https://via.placeholder.com/50?text=?"
+}
+
+celulaImagem.appendChild(img)
+
+// recria resto das células
+linhaSalva.celulas.forEach((celulaSalva, index) => {
+
+if(index === 0) return // pula imagem já criada
 
 let celula = linha.insertCell()
 celula.innerText = celulaSalva.texto
@@ -351,7 +372,6 @@ mostrarVitoria()
 }
 
 }
-
 // ================= COMPARTILHAR =================
 function compartilhar(){
 
