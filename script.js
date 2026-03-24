@@ -80,10 +80,6 @@ let sugestoesAtuais = []
 
 // ================= ELEMENTOS =================
 let input = document.getElementById("guess")
-let imagem = document.getElementById("imagem")
-
-imagem.src = resposta.imagemTentativa
-imagem.style.filter = "brightness(0)"
 
 // ================= EVENTOS =================
 input.addEventListener("input", mostrarSugestoes)
