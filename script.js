@@ -55,19 +55,28 @@
 
 ]
 
-// ================= ORDEM ALFABETICA =================
+// ================= ORDEM ALFABÉTICA =================
 personagens.sort((a,b)=>
 a.nome.localeCompare(b.nome, "pt", {sensitivity:"base"})
 )
 
-// ================= CHAVE DO DIA =================
-const chaveJogo = "epicdle-" + new Date().toISOString().slice(0,10)
+// ================= DATA LOCAL =================
+function getDataLocal(){
+const hoje = new Date()
+const ano = hoje.getFullYear()
+const mes = String(hoje.getMonth()+1).padStart(2,"0")
+const dia = String(hoje.getDate()).padStart(2,"0")
+return `${ano}-${mes}-${dia}`
+}
+
+const STORAGE_KEY = "epicdle-state"
+let dataAtual = getDataLocal()
 
 // ================= PERSONAGEM DO DIA =================
 function personagemDoDia(){
-let hoje=new Date()
-let numero=hoje.getFullYear()*10000+(hoje.getMonth()+1)*100+hoje.getDate()
-return personagens[numero%personagens.length]
+let hoje = getDataLocal().replace(/-/g,"")
+let numero = parseInt(hoje)
+return personagens[numero % personagens.length]
 }
 
 // ================= VARIÁVEIS =================
@@ -103,11 +112,9 @@ return
 }
 
 if(e.key==="Enter"){
-
 if(selecionadoIndex>=0){
 input.value=sugestoesAtuais[selecionadoIndex].nome
 }
-
 verificar()
 }
 
@@ -170,9 +177,7 @@ return
 
 let nome=input.value.trim()
 
-let tentativa = personagens.find(p =>
-p.nome.toLowerCase()===nome.toLowerCase()
-)
+let tentativa = personagens.find(p => p.nome === nome)
 
 if(!tentativa){
 mostrarMensagem("Personagem não encontrado")
@@ -210,19 +215,22 @@ let celulaImagem = linha.insertCell()
 
 let img = document.createElement("img")
 img.src = tentativa.imagemTentativa
-
 img.onerror = () => {
 img.src = "https://via.placeholder.com/50?text=?"
 }
-
+img.style.width = "50px"
 celulaImagem.appendChild(img)
 
 let campos=["nome","status","especie","genero","pseudonimo","saga"]
 
-campos.forEach(campo=>{
+campos.forEach((campo,index)=>{
 
 let celula=linha.insertCell()
 celula.innerText=tentativa[campo]
+
+setTimeout(()=>{
+celula.classList.add("flip")
+}, index*150)
 
 let valorResposta = resposta[campo].toLowerCase().trim()
 let valorTentativa = tentativa[campo].toLowerCase().trim()
@@ -258,55 +266,27 @@ jogoFinalizado=true
 document.getElementById("vitoria").style.display="block"
 
 let imgVitoria = document.getElementById("imagemVitoria")
-
-if(resposta?.imagemVitoria){
-imgVitoria.src = resposta.imagemVitoria
- 
-localStorage.setItem(chaveJogo + "-vitoria", "true")
-}
+imgVitoria.src = resposta.imagemVitoria || resposta.imagemTentativa
 
 document.getElementById("nomeVitoria").innerText=resposta.nome
 document.getElementById("pseudoVitoria").innerText=resposta.pseudonimo
 
 input.disabled = true
 
-mostrarMensagem("Parabéns! Você acertou!")
+mostrarMensagem("🎉 Acertou!")
 
- // ===== STREAK =====
-let hoje = new Date().toISOString().slice(0,10)
-
-let ultimoDia = localStorage.getItem("epicdle-ultimo-dia")
-let streak = parseInt(localStorage.getItem("epicdle-streak")) || 0
-
-if(ultimoDia){
-let ontem = new Date()
-ontem.setDate(ontem.getDate()-1)
-ontem = ontem.toISOString().slice(0,10)
-
-if(ultimoDia === ontem){
-streak++
-}else if(ultimoDia !== hoje){
-streak = 1
-}
-}else{
-streak = 1
-}
-
-localStorage.setItem("epicdle-streak", streak)
-localStorage.setItem("epicdle-ultimo-dia", hoje)
-
-mostrarMensagem("🔥 Streak: " + streak)
-
+salvarProgresso()
 }
 
 // ================= SALVAR =================
 function salvarProgresso(){
 
 let dados = {
+data: getDataLocal(),
 tentativas,
 usados,
 jogoFinalizado,
-respostaNome: resposta.nome, // 🔥 NOVO
+respostaNome: resposta.nome,
 linhas: []
 }
 
@@ -332,92 +312,94 @@ celulas: celulas
 
 })
 
-localStorage.setItem(chaveJogo, JSON.stringify(dados))
+localStorage.setItem(STORAGE_KEY, JSON.stringify(dados))
 }
 
 // ================= CARREGAR =================
 function carregarProgresso(){
 
-let dados = localStorage.getItem(chaveJogo)
-if(!dados) return
+let dados = localStorage.getItem(STORAGE_KEY)
+
+if(!dados){
+atualizarTimer()
+return
+}
 
 dados = JSON.parse(dados)
 
-// 🔥 restaura resposta correta
-if(dados.respostaNome){
-let salvo = personagens.find(p => p.nome === dados.respostaNome)
- 
-if(salvo) resposta = salvo
- 
-if(localStorage.getItem(chaveJogo + "-vitoria") === "true"){
-mostrarVitoria()
-}
+if(dados.data !== getDataLocal()){
+localStorage.removeItem(STORAGE_KEY)
+atualizarTimer()
+return
 }
 
-tentativas = dados.tentativas || 0
-usados = dados.usados || []
-jogoFinalizado = dados.jogoFinalizado || false
+tentativas = dados.tentativas
+usados = dados.usados
+jogoFinalizado = dados.jogoFinalizado
 
 document.getElementById("tentativas").innerText = "Tentativas: " + tentativas
 
 dados.linhas.forEach(linhaSalva => {
 
 let tentativa = personagens.find(p => p.nome === linhaSalva.nome)
-if(!tentativa) return // 🔥 proteção mobile
+if(!tentativa) return
 
 let linha = document.getElementById("tabela").insertRow()
 
 let celulaImagem = linha.insertCell()
-
 let img = document.createElement("img")
 img.src = tentativa.imagemTentativa
+img.onerror = () => {
+img.src = "https://via.placeholder.com/50?text=?"
+}
 celulaImagem.appendChild(img)
 
 linhaSalva.celulas.forEach((celulaSalva, index) => {
-
 if(index === 0) return
-
 let celula = linha.insertCell()
 celula.innerText = celulaSalva.texto
 celula.className = celulaSalva.classe
-
 })
 
 })
 
- // ================= COMPARTILHAR =================
-function compartilhar(){
-
-let linhas=document.querySelectorAll("#tabela tr")
-
-let texto="EPICdle "+tentativas+" tentativas\n"
-texto+="🔥 Streak: "+(localStorage.getItem("epicdle-streak")||1)+"\n\n"
-
-linhas.forEach((linha,i)=>{
-
-if(i==0)return
-
-linha.querySelectorAll("td").forEach(c=>{
-
-if(c.classList.contains("verde")) texto+="🟩"
-else if(c.classList.contains("amarelo")) texto+="🟨"
-else texto+="🟥"
-
-})
-
-texto+="\n"
-
-})
-
-navigator.clipboard.writeText(texto)
-mostrarMensagem("Resultado copiado!")
-}
- 
 if(jogoFinalizado){
 mostrarVitoria()
 }
 
+atualizarTimer()
 }
+
+// ================= TIMER =================
+function atualizarTimer(){
+
+let agora=new Date()
+let meiaNoite=new Date()
+meiaNoite.setHours(24,0,0,0)
+
+let diff=meiaNoite-agora
+
+let h=Math.floor(diff/1000/60/60)
+let m=Math.floor(diff/1000/60)%60
+let s=Math.floor(diff/1000)%60
+
+let el = document.getElementById("timer")
+if(el){
+el.innerText=`Próximo personagem em ${h}h ${m}m ${s}s`
+}
+
+}
+
+atualizarTimer()
+setInterval(atualizarTimer,1000)
+
+// ================= RESET DIÁRIO =================
+setInterval(()=>{
+if(getDataLocal() !== dataAtual){
+localStorage.removeItem(STORAGE_KEY)
+location.reload()
+}
+},60000)
 
 // ================= INICIAR =================
 carregarProgresso()
