@@ -170,10 +170,9 @@ return
 
 let nome=input.value.trim()
 
-let tentativa = personagens.find(p => p.nome === linhaSalva.nome)
-if(!tentativa) return // 🔥 evita quebrar tudo
-let img = document.createElement("img")
-img.src = tentativa.imagemTentativa
+let tentativa = personagens.find(p =>
+p.nome.toLowerCase()===nome.toLowerCase()
+)
 
 if(!tentativa){
 mostrarMensagem("Personagem não encontrado")
@@ -207,7 +206,6 @@ salvarProgresso()
 // ================= COMPARAÇÃO =================
 function comparar(linha,tentativa){
 
-// imagem tentativa
 let celulaImagem = linha.insertCell()
 
 let img = document.createElement("img")
@@ -217,19 +215,14 @@ img.onerror = () => {
 img.src = "https://via.placeholder.com/50?text=?"
 }
 
-img.style.width = "50px"
-img.style.borderRadius = "6px"
-
 celulaImagem.appendChild(img)
 
-// campos
 let campos=["nome","status","especie","genero","pseudonimo","saga"]
 
 campos.forEach(campo=>{
 
 let celula=linha.insertCell()
 celula.innerText=tentativa[campo]
-celula.classList.add("flip")
 
 let valorResposta = resposta[campo].toLowerCase().trim()
 let valorTentativa = tentativa[campo].toLowerCase().trim()
@@ -265,20 +258,14 @@ jogoFinalizado=true
 document.getElementById("vitoria").style.display="block"
 
 let imgVitoria = document.getElementById("imagemVitoria")
-if(resposta && resposta.imagemVitoria){
-imgVitoria.src = resposta.imagemVitoria
-}
 
-imgVitoria.onerror = () => {
-imgVitoria.src = resposta.imagemTentativa
+if(resposta?.imagemVitoria){
+imgVitoria.src = resposta.imagemVitoria
 }
 
 document.getElementById("nomeVitoria").innerText=resposta.nome
 document.getElementById("pseudoVitoria").innerText=resposta.pseudonimo
 
-imagem.style.filter = "brightness(1)"
-
-// bloqueia input
 input.disabled = true
 
 mostrarMensagem("Parabéns! Você acertou!")
@@ -292,6 +279,7 @@ let dados = {
 tentativas,
 usados,
 jogoFinalizado,
+respostaNome: resposta.nome, // 🔥 NOVO
 linhas: []
 }
 
@@ -300,7 +288,7 @@ let linhas = document.querySelectorAll("#tabela tr")
 linhas.forEach((linha,i)=>{
 if(i===0) return
 
-let nomePersonagem = linha.cells[1].innerText // 👈 pega o nome
+let nomePersonagem = linha.cells[1].innerText
 
 let celulas = []
 linha.querySelectorAll("td").forEach(c=>{
@@ -319,43 +307,43 @@ celulas: celulas
 
 localStorage.setItem(chaveJogo, JSON.stringify(dados))
 }
+
 // ================= CARREGAR =================
 function carregarProgresso(){
 
 let dados = localStorage.getItem(chaveJogo)
-
 if(!dados) return
 
 dados = JSON.parse(dados)
 
-tentativas = dados.tentativas
-usados = dados.usados
-jogoFinalizado = dados.jogoFinalizado
+// 🔥 restaura resposta correta
+if(dados.respostaNome){
+let salvo = personagens.find(p => p.nome === dados.respostaNome)
+if(salvo) resposta = salvo
+}
+
+tentativas = dados.tentativas || 0
+usados = dados.usados || []
+jogoFinalizado = dados.jogoFinalizado || false
 
 document.getElementById("tentativas").innerText = "Tentativas: " + tentativas
 
 dados.linhas.forEach(linhaSalva => {
 
 let tentativa = personagens.find(p => p.nome === linhaSalva.nome)
+if(!tentativa) return // 🔥 proteção mobile
 
 let linha = document.getElementById("tabela").insertRow()
 
-// 🖼️ recria imagem corretamente
 let celulaImagem = linha.insertCell()
 
 let img = document.createElement("img")
 img.src = tentativa.imagemTentativa
-
-img.onerror = () => {
-img.src = "https://via.placeholder.com/50?text=?"
-}
-
 celulaImagem.appendChild(img)
 
-// recria resto das células
 linhaSalva.celulas.forEach((celulaSalva, index) => {
 
-if(index === 0) return // pula imagem já criada
+if(index === 0) return
 
 let celula = linha.insertCell()
 celula.innerText = celulaSalva.texto
@@ -365,59 +353,11 @@ celula.className = celulaSalva.classe
 
 })
 
-// se já ganhou
 if(jogoFinalizado){
 mostrarVitoria()
 }
 
 }
-// ================= COMPARTILHAR =================
-function compartilhar(){
-
-let linhas=document.querySelectorAll("#tabela tr")
-
-let texto="EPICdle "+tentativas+" tentativas\n\n"
-
-linhas.forEach((linha,i)=>{
-
-if(i==0)return
-
-linha.querySelectorAll("td").forEach(c=>{
-
-if(c.classList.contains("verde")) texto+="🟩"
-else if(c.classList.contains("amarelo")) texto+="🟨"
-else texto+="🟥"
-
-})
-
-texto+="\n"
-
-})
-
-navigator.clipboard.writeText(texto)
-mostrarMensagem("Resultado copiado!")
-
-}
-
-// ================= TIMER =================
-function atualizarTimer(){
-
-let agora=new Date()
-let meiaNoite=new Date()
-meiaNoite.setHours(24,0,0,0)
-
-let diff=meiaNoite-agora
-
-let h=Math.floor(diff/1000/60/60)
-let m=Math.floor(diff/1000/60)%60
-let s=Math.floor(diff/1000)%60
-
-document.getElementById("timer").innerText=
-"Próximo personagem em "+h+"h "+m+"m "+s+"s"
-
-}
-
-setInterval(atualizarTimer,1000)
 
 // ================= INICIAR =================
 carregarProgresso()
