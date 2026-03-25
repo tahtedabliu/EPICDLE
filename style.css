@@ -1,107 +1,430 @@
 *{
+
 margin:0;
+
 padding:0;
+
 box-sizing:border-box;
+
 }
+
 body{
+
 font-family:"Poppins",sans-serif;
+
 background:linear-gradient(135deg,#0d0d0d,#000);
+
 min-height:100vh;
+
 display:flex;
+
 justify-content:center;
+
 align-items:center;
+
 color:white;
+
 }
+
 /* ================= CONTAINER ================= */
+
 .container{
+
 background:#181818;
+
 padding:35px;
+
 border-radius:18px;
+
 box-shadow:0 10px 40px rgba(0,0,0,0.8);
+
 text-align:center;
+
 width:95%;
+
 max-width:800px;
+
 border:1px solid #2a2a2a;
+
 }
+
 /* ================= IMAGENS ================= */
+
 img{
+
 width:200px;
+
 margin:15px 0;
+
 transition:0.4s ease;
+
 }
+
 td img{
+
 transition:0.25s ease;
+
 }
+
 td img:hover{
+
 transform:scale(1.15);
+
 }
+
 #imagemVitoria{
+
 width:240px;
+
 margin-top:15px;
+
 }
+
 /* ================= INPUT ================= */
+
 input{
+
 width:80%;
+
 padding:12px;
+
 border-radius:10px;
+
 border:1px solid #333;
+
 outline:none;
+
 margin-top:10px;
+
 font-size:16px;
+
 background:#222;
+
 color:white;
+
 transition:0.3s;
+
 }
+
 input:focus{
+
 border-color:#666;
+
 box-shadow:0 0 8px rgba(255,255,255,0.1);
+
 }
+
 /* ================= BOTÃO ================= */
+
 button{
+
 margin-top:12px;
+
 padding:10px 20px;
+
 border:none;
+
 border-radius:10px;
+
 background:#3a8f3a;
+
 color:white;
+
 font-size:15px;
+
 cursor:pointer;
+
 transition:0.25s;
+
 }
+
 button:hover{
+
 background:#4caf50;
+
 transform:scale(1.05);
+
 }
+
 /* ================= SUGESTÕES ================= */
-.input-box{
-position:relative;
+
+#sugestoes{
+
 width:80%;
-margin:auto;
+
+margin:10px auto;
+
+background:#1f1f1f;
+
+border-radius:8px;
+
+overflow:hidden;
+
+border:1px solid #333;
+
+}
+
+#sugestoes div{
+
+padding:10px;
+
+cursor:pointer;
+
+border-bottom:1px solid #333;
+
+transition:0.2s;
+
+}
+
+#sugestoes div:hover{
+
+background:#333;
+
+}
+
+.selecionado{
+
+background:#444 !important;
+
+}
+
+/* ================= TABELA ================= */
+
+table{
+
+margin-top:20px;
+
+width:100%;
+
+border-collapse:separate;
+
+border-spacing:6px;
+
+}
+
+td,th{
+
+padding:10px;
+
+border-radius:8px;
+
+text-align:center;
+
+background:#202020;
+
+}
+
+/* ================= IMAGEM NA TABELA ================= */
+
+#tabela td:first-child{
+
+width:70px;
+
+height:70px;
+
+padding:6px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:#111;
+
+border:1px solid #333;
+
+}
+
+#tabela td:first-child,
+
+#tabela th:first-child{
+
+text-align: center;
+
+vertical-align: middle;
+
+}
+
+#tabela td:first-child img{
+
+display: block;
+
+margin: 0 auto;
+
+width:100%;
+
+height:100%;
+
+max-width:60px;
+
+max-height:60px;
+
+object-fit:contain,cover; /* 👈 mantém proporção sem cortar */
+
+border-radius:8px;
+
+}
+
+/* ================= CORES ================= */
+
+.verde{
+
+background:#2e7d32;
+
+color:white;
+
+}
+
+.vermelho{
+
+background:#c62828;
+
+color:white;
+
+}
+
+.amarelo{
+
+background:#f9a825;
+
+color:black;
+
+}
+
+/* ================= ANIMAÇÃO ================= */
+
+.flip{
+
+animation:flip 0.5s ease;
+
+}
+
+@keyframes flip{
+
+0%{transform:rotateX(90deg); opacity:0;}
+
+100%{transform:rotateX(0); opacity:1;}
+
+}
+
+/* ================= VITÓRIA ================= */
+
+#vitoria{
+
+display:none;
+
+margin-top:50px;
+
+padding:20px;
+
+background:#1a1a1a;
+
+border-radius:15px;
+
+border:1px solid #333;
+
+box-shadow:0 0 20px rgba(0,0,0,0.6);
+
+animation:fadeIn 0.4s ease;
+
+}
+
+@keyframes fadeIn{
+
+from{opacity:0; transform:translateY(10px);}
+
+to{opacity:1; transform:translateY(0);}
+
+}
+
+/* ================= TEXTO ================= */
+
+#mensagem{
+
+margin-top:10px;
+
+min-height:20px;
+
+font-weight:500;
+
+color:#ccc;
+
+}
+
+#timer{
+
+margin-top:10px;
+
+font-size:14px;
+
+opacity:0.7;
+
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px){
+
+.container{
+
+padding:20px;
+
+}
+
+input{
+
+width:95%;
+
+font-size:18px;
+
 }
 
 #sugestoes{
-position:absolute;
-top:100%;
-left:0;
-width:100%;
-background:#222;
-border-radius:8px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.5);
-z-index:10;
-max-height:200px;
-overflow-y:auto;
+
+width:95%;
+
 }
-#sugestoes div{
-padding:10px;
-cursor:pointer;
-border-bottom:1px solid #333;
-transition:0.2s;
+
+table{
+
+border-spacing:4px;
+
 }
-#sugestoes div:hover{
-background:#333;
+
+td{
+
+min-width:65px;
+
+padding:6px;
+
+font-size:12px;
+
 }
-.selecionado{
+
+#tabela td:first-child{
+
+width:55px;
+
+height:55px;
+
+}
+
+#imagemVitoria{
+
+width:100px;
+
+}
+
+button{
+
+width:95%;
+
+font-size:16px;
+
+}
+
+}.selecionado{
 background:#444 !important;
 }
 /* ================= TABELA ================= */
