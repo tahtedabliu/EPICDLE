@@ -10,7 +10,7 @@ box-sizing:border-box;
 
 body{
 
-font-family:"Poppins",sans-serif;
+font-family:inherit;
 
 background:linear-gradient(135deg,#0d0d0d,#000);
 
