@@ -10,7 +10,7 @@ box-sizing:border-box;
 
 body{
 
-font-family:'Nunito';
+font-family:'Nunito',sans-serif;
 
 background:linear-gradient(135deg,#0d0d0d,#000);
 
