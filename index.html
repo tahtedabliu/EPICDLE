@@ -1,40 +1,56 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>EPICDLE</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
-  
-<!-- MENU -->
-<div id="menu">
+
+<!-- ================= MENU ================= -->
+<div id="menu" class="container">
+
 <h1>EPICDLE</h1>
 
+<p>Escolha um modo</p>
+
+<button onclick="abrirModo('personagem')">🧠 Modo Personagem</button>
 <button onclick="abrirModo('musica')">🎵 Modo Música</button>
-<button onclick="abrirSobre()">📖 Sobre</button>
-<button onclick="abrirFeedback()">💬 Feedback</button>
-</div>
-  
-<div class="container">
+<button onclick="abrirModo('sobre')">📖 Sobre</button>
 
-<h1>EPICDLE</h1>
+</div>
+
+<!-- ================= SOBRE ================= -->
+<div id="sobre" class="container" style="display:none">
+
+<h2>Sobre</h2>
+
+<p>
+Este jogo foi inspirado no Wordle, adaptado para o universo do musical EPIC.
+</p>
+
+<button onclick="voltarMenu()">⬅ Voltar</button>
+
+</div>
+
+<!-- ================= PERSONAGEM ================= -->
+<div id="personagem" class="container" style="display:none">
+
+<h1>EPICDLE - Personagem</h1>
 
 <p id="mensagem"></p>
-
 <p id="tentativas">Tentativas: 0</p>
 <p id="timer"></p>
-
+<p id="streak"></p>
 
 <input type="text" id="guess" placeholder="Digite o personagem">
-
 <div id="sugestoes"></div>
 
-<button id="botaoTentar" onclick="verificar()">Tentar</button>
+<button onclick="verificar()">Tentar</button>
 
 <table id="tabela">
 <tr>
@@ -57,54 +73,51 @@
 <h3 id="nomeVitoria"></h3>
 <p id="pseudoVitoria"></p>
 
-<button id="compartilharBtn" onclick="compartilhar()">
-Compartilhar resultado
-</button>
+<button onclick="compartilhar()">Compartilhar</button>
 
 </div>
 
+<button onclick="voltarMenu()">⬅ Voltar</button>
+
 </div>
 
-<script src="script.js"><div id="sobre" style="display:none">
-<h2>Sobre</h2>
-<p>Inspirado no Wordle</p>
-<button onclick="voltarMenu()">Voltar</button>
-</div>
+<!-- ================= MÚSICA ================= -->
+<div id="musica" class="container" style="display:none">
 
-<div id="feedback" style="display:none">
-<textarea id="msgFeedback"></textarea>
-<button onclick="enviarFeedback()">Enviar</button>
-<button onclick="voltarMenu()">Voltar</button>
-  </div></script>
-<div class="container" id="jogoMusica" style="display:none">
-
-<h2>Modo Música</h2>
+<h1>EPICDLE - Música</h1>
 
 <p id="tentativasMusica">Tentativas: 0</p>
-<p id="timerMusica"></p>
+<p id="timer"></p>
+<p id="streak"></p>
 
 <pre id="trechoMusica"></pre>
-<p id="dicaMusica"></p>
 
-<input type="text" id="guessMusica">
+<input type="text" id="guessMusica" placeholder="Digite a música">
+
 <div id="sugestoesMusica"></div>
 
 <button onclick="verificarMusica()">Tentar</button>
 
 <table id="tabelaMusica">
-<tr><th>Música</th></tr>
+<tr>
+<th>Nome</th>
+</tr>
 </table>
 
 <div id="resultadoMusica" style="display:none">
+
 <h2>🎉 Acertou!</h2>
-<img id="capaMusica">
+
 <h3 id="nomeMusica"></h3>
+<img id="capaMusica">
+
 </div>
 
-<button onclick="compartilharMusica()">Compartilhar</button>
 <button onclick="voltarMenu()">⬅ Voltar</button>
 
 </div>
-  
+
+<script src="script.js"></script>
+
 </body>
 </html>
