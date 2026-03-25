@@ -97,40 +97,7 @@ let input = document.getElementById("guess")
 let box = document.getElementById("sugestoes")
 
 // ================= DIGITAÇÃO =================
-if(input){
-input.addEventListener("input", mostrarSugestoes)
-input.addEventListener("keydown", function(e){
-let itens = document.querySelectorAll("#sugestoes div")
-  
-// ↓
-if(e.key === "ArrowDown"){
-selecionadoIndex++
-if(selecionadoIndex >= itens.length) selecionadoIndex = 0
-atualizarSelecao(itens)
-return
-}
 
-// ↑
-if(e.key === "ArrowUp"){
-selecionadoIndex--
-if(selecionadoIndex < 0) selecionadoIndex = itens.length - 1
-atualizarSelecao(itens)
-return
-}
-
-// ENTER
-if(e.key === "Enter"){
-
-if(selecionadoIndex >= 0){
-input.value = sugestoesAtuais[selecionadoIndex].nome
-limparSugestoes()
-}else{
-verificar()
-}
-
-}
-
-}
 
 // ================= MOSTRAR =================
 function mostrarSugestoes(){
@@ -176,7 +143,45 @@ itens[selecionadoIndex].classList.add("selecionado")
 
 }
 
-// ================= LIMPAR =================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+let input = document.getElementById("guess")
+let box = document.getElementById("sugestoes")
+
+if(!input || !box) return
+
+input.addEventListener("input", mostrarSugestoes)
+
+input.addEventListener("keydown", function(e){
+let itens = document.querySelectorAll("#sugestoes div")
+
+if(e.key === "ArrowDown"){
+selecionadoIndex++
+if(selecionadoIndex >= itens.length) selecionadoIndex = 0
+atualizarSelecao(itens)
+return
+}
+
+if(e.key === "ArrowUp"){
+selecionadoIndex--
+if(selecionadoIndex < 0) selecionadoIndex = itens.length - 1
+atualizarSelecao(itens)
+return
+}
+
+if(e.key === "Enter"){
+if(selecionadoIndex >= 0){
+input.value = sugestoesAtuais[selecionadoIndex].nome
+limparSugestoes()
+}
+verificar()
+}
+
+})
+
+})
+// ================ LIMPAR =================
 function limparSugestoes(){
 box.innerHTML = ""
 selecionadoIndex = -1
