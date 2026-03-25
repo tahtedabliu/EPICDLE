@@ -3,55 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <title>EPICDLE</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
-
-<!-- ================= MENU ================= -->
-<div id="menu" class="container">
-
+<div class="container">
 <h1>EPICDLE</h1>
-
-<p>Escolha um modo</p>
-
-<button onclick="abrirModo('personagem')">🧠 Modo Personagem</button>
-<button onclick="abrirModo('musica')">🎵 Modo Música</button>
-<button onclick="abrirModo('sobre')">📖 Sobre</button>
-
-</div>
-
-<!-- ================= SOBRE ================= -->
-<div id="sobre" class="container" style="display:none">
-
-<h2>Sobre</h2>
-
-<p>
-Este jogo foi inspirado no Wordle, adaptado para o universo do musical EPIC.
-</p>
-
-<button onclick="voltarMenu()">⬅ Voltar</button>
-
-</div>
-
-<!-- ================= PERSONAGEM ================= -->
-<div id="personagem" class="container" style="display:none">
-
-<h1>EPICDLE - Personagem</h1>
-
 <p id="mensagem"></p>
 <p id="tentativas">Tentativas: 0</p>
 <p id="timer"></p>
-<p id="streak"></p>
-
 <input type="text" id="guess" placeholder="Digite o personagem">
 <div id="sugestoes"></div>
-
-<button onclick="verificar()">Tentar</button>
-
+<button id="botaoTentar" onclick="verificar()">Tentar</button>
 <table id="tabela">
 <tr>
 <th>Imagem</th>
@@ -63,61 +26,16 @@ Este jogo foi inspirado no Wordle, adaptado para o universo do musical EPIC.
 <th>Saga</th>
 </tr>
 </table>
-
 <div id="vitoria" style="display:none">
-
 <h2>🎉 Você acertou!</h2>
-
 <img id="imagemVitoria">
-
 <h3 id="nomeVitoria"></h3>
 <p id="pseudoVitoria"></p>
-
-<button onclick="compartilhar()">Compartilhar</button>
-
+<button id="compartilharBtn" onclick="compartilhar()">
+Compartilhar resultado
+</button>
 </div>
-
-<button onclick="voltarMenu()">⬅ Voltar</button>
-
 </div>
-
-<!-- ================= MÚSICA ================= -->
-<div id="musica" class="container" style="display:none">
-
-<h1>EPICDLE - Música</h1>
-
-<p id="tentativasMusica">Tentativas: 0</p>
-<p id="timer"></p>
-<p id="streak"></p>
-
-<pre id="trechoMusica"></pre>
-
-<input type="text" id="guessMusica" placeholder="Digite a música">
-
-<div id="sugestoesMusica"></div>
-
-<button onclick="verificarMusica()">Tentar</button>
-
-<table id="tabelaMusica">
-<tr>
-<th>Nome</th>
-</tr>
-</table>
-
-<div id="resultadoMusica" style="display:none">
-
-<h2>🎉 Acertou!</h2>
-
-<h3 id="nomeMusica"></h3>
-<img id="capaMusica">
-
-</div>
-
-<button onclick="voltarMenu()">⬅ Voltar</button>
-
-</div>
-
 <script src="script.js"></script>
-
 </body>
 </html>
