@@ -79,6 +79,8 @@ let resposta = personagemDoDia()
 let tentativas = 0
 let usados = []
 let jogoFinalizado = false
+let selecionadoIndex = -1
+let sugestoesAtuais = []
 
 // ================= MENSAGEM =================
 function mostrarMensagem(msg){
@@ -94,18 +96,12 @@ return txt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
 let input = document.getElementById("guess")
 let box = document.getElementById("sugestoes")
 
-let selecionadoIndex = -1
-let sugestoesAtuais = []
-
 // ================= DIGITAÇÃO =================
 if(input){
-
 input.addEventListener("input", mostrarSugestoes)
-
 input.addEventListener("keydown", function(e){
-
 let itens = document.querySelectorAll("#sugestoes div")
-
+  
 // ↓
 if(e.key === "ArrowDown"){
 selecionadoIndex++
