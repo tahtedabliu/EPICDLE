@@ -7,7 +7,7 @@ const personagens=[
 {nome:"Agamemnon",status:"dead",especie:"human",genero:"male",pseudonimo:"King, General, Disloyal Husband",saga:"Troy",imagemTentativa:"imagens/agamenom.png",imagemVitoria:"imagens/agamenom-vitoria.png"},
 {nome:"Achilles",status:"dead",especie:"demigod",genero:"male",pseudonimo:"Invincible Hero",saga:"Troy",imagemTentativa:"imagens/aquiles.png",imagemVitoria:"imagens/aquiles-vitoria.png"},
 {nome:"Patroclus",status:"dead",especie:"human",genero:"male",pseudonimo:"Companion of Achilles",saga:"Troy",imagemTentativa:"imagens/pátroclo.png",imagemVitoria:"imagens/pátroclo-vitoria.png"},
-{nome:"Hector",status:"dead",especie:"human",genero:"male",pseudonimo:"Prince of Troy",saga:"Troy",imagemTentativa:"imagens/hector.png",imagemVitoria:"imagens/hector-vitoria.png"},
+{nome:"Hector",status:"dead",especie:"human",genero:"male",pseudonimo:"Prince of Troy",saga:"Troy",imagemTentativa:"imagens/hector.png",imagemVitoria:"imagens/hector-vitoria.gif"},
 {nome:"Ajax",status:"dead",especie:"human",genero:"male",pseudonimo:"Great Warrior",saga:"Troy",imagemTentativa:"imagens/ájax.png",imagemVitoria:"imagens/ájax-vitoria.png"},
 
 // ===== CREW =====
@@ -33,10 +33,10 @@ const personagens=[
 // ===== MONSTERS =====
 {nome:"Polyphemus",status:"alive",especie:"monster",genero:"male",pseudonimo:"Cyclops",saga:"Cyclops",imagemTentativa:"imagens/polyphemus.png",imagemVitoria:"imagens/polyphemus-vitoria.png"},
 {nome:"Scylla",status:"alive",especie:"monster",genero:"female",pseudonimo:"Sea Monster",saga:"Thunder",imagemTentativa:"imagens/scylla.png",imagemVitoria:"imagens/scylla-vitoria.png"},
-{nome:"Charybdis",status:"alive",especie:"monster",genero:"female",pseudonimo:"Living Whirlpool",saga:"Thunder",imagemTentativa:"imagens/charybdis.png",imagemVitoria:"imagens/charybdis-vitoria.png"},
-{nome:"Sirens",status:"alive",especie:"monster",genero:"female",pseudonimo:"Sea Singers",saga:"Ocean",imagemTentativa:"imagens/sirens.png",imagemVitoria:"imagens/sirens-vitoria.png"},
+{nome:"Charybdis",status:"alive",especie:"monster",genero:"female",pseudonimo:"Living Whirlpool",saga:"Vengeance",imagemTentativa:"imagens/charybdis.png",imagemVitoria:"imagens/charybdis-vitoria.png"},
+{nome:"Sirens",status:"alive",especie:"monster",genero:"female",pseudonimo:"Sea Singers",saga:"Thunder",imagemTentativa:"imagens/sirens.png",imagemVitoria:"imagens/sirens-vitoria.png"},
 {nome:"Laestrygonians",status:"alive",especie:"monster",genero:"indefinido",pseudonimo:"Giants",saga:"Ocean",imagemTentativa:"imagens/laestrygonians.png",imagemVitoria:"imagens/laestrygonians-vitoria.png"},
-{nome:"Lotus Eaters",status:"alive",especie:"monster",genero:"indefinido",pseudonimo:"Lotus Eaters",saga:"Ocean",imagemTentativa:"imagens/winions.png",imagemVitoria:"imagens/winions-vitoria.png"},
+{nome:"Lotus Eaters",status:"alive",especie:"monster",genero:"indefinido",pseudonimo:"Lotus Eaters",saga:"Troy",imagemTentativa:"imagens/winions.png",imagemVitoria:"imagens/winions-vitoria.png"},
 
 // ===== OTHERS =====
 {nome:"Tiresias",status:"dead",especie:"human",genero:"male",pseudonimo:"Prophet",saga:"Underworld",imagemTentativa:"imagens/tiresias.png",imagemVitoria:"imagens/tiresias-vitoria.png"},
@@ -45,13 +45,13 @@ const personagens=[
 // ===== ITHACA =====
 {nome:"Penelope",status:"alive",especie:"human",genero:"female",pseudonimo:"Queen",saga:"Ithaca",imagemTentativa:"imagens/penelope.png",imagemVitoria:"imagens/penelope-vitoria.png"},
 {nome:"Telemachus",status:"alive",especie:"human",genero:"male",pseudonimo:"Prince",saga:"Wisdom",imagemTentativa:"imagens/telemachus.png",imagemVitoria:"imagens/telemachus-vitoria.png"},
-{nome:"Argos",status:"alive",especie:"animal",genero:"male",pseudonimo:"Faithful Dog",saga:"Ithaca",imagemTentativa:"imagens/argos.png",imagemVitoria:"imagens/argos-vitoria.png"},
+{nome:"Argos",status:"alive",especie:"animal",genero:"male",pseudonimo:"Faithful Dog",saga:"Wisdom",imagemTentativa:"imagens/argos.png",imagemVitoria:"imagens/argos-vitoria.png"},
 {nome:"Antinous",status:"dead",especie:"human",genero:"male",pseudonimo:"Suitor",saga:"Ithaca",imagemTentativa:"imagens/antinous.png",imagemVitoria:"imagens/antinous-vitoria.png"},
 {nome:"Eurymachus",status:"dead",especie:"human",genero:"male",pseudonimo:"Suitor",saga:"Ithaca",imagemTentativa:"imagens/eurymachus.png",imagemVitoria:"imagens/eurymachus-vitoria.png"},
 {nome:"Amphinomus",status:"dead",especie:"human",genero:"male",pseudonimo:"Suitor",saga:"Ithaca",imagemTentativa:"imagens/amphinomus.png",imagemVitoria:"imagens/amphinomus-vitoria.png"},
 
 // ===== FINAL =====
-{nome:"Astyanax",status:"dead",especie:"human",genero:"male",pseudonimo:"Prince of Troy",saga:"Troy",imagemTentativa:"imagens/scamandrius.png",imagemVitoria:"imagens/scamandrius-vitoria.png"},
+{nome:"Scamandrius",status:"dead",especie:"human",genero:"male",pseudonimo:"Prince of Troy",saga:"Troy",imagemTentativa:"imagens/scamandrius.png",imagemVitoria:"imagens/scamandrius-vitoria.png"},
 
 ]
 
