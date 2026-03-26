@@ -9,18 +9,23 @@ const personagens=[
 {nome:"Patroclus",status:"dead",especie:"human",genero:"male",pseudonimo:"Companion of Achilles",saga:"Troy",imagemTentativa:"imagens/pátroclo.png",imagemVitoria:"imagens/pátroclo-vitoria.png"},
 {nome:"Hector",status:"dead",especie:"human",genero:"male",pseudonimo:"Prince of Troy",saga:"Troy",imagemTentativa:"imagens/hector.png",imagemVitoria:"imagens/hector-vitoria.gif"},
 {nome:"Ajax",status:"dead",especie:"human",genero:"male",pseudonimo:"Great Warrior",saga:"Troy",imagemTentativa:"imagens/ájax.png",imagemVitoria:"imagens/ájax-vitoria.png"},
-
+  
+// ===== CUT =====
+{nome:"Helen",status:"alive",especie:"demigod",genero:"female",pseudonimo:"Queen",saga:"Cut",imagemTentativa:"imagens/helena.png",imagemVitoria:"imagens/helena-vitoria.png"},
+{nome:"Tyndareus",status:"alive",especie:"human",genero:"male",pseudonimo:"King",saga:"Cut",imagemTentativa:"imagens/tyndareus.png",imagemVitoria:"imagens/tyndareus-vitoria.png"},
+{nome:"Laertes",status:"alive",especie:"human",genero:"male",pseudonimo:"King",saga:"Cut",imagemTentativa:"imagens/laertes.png",imagemVitoria:"imagens/laertes-vitoria.png"},  
+  
 // ===== CREW =====
-{nome:"Polites",status:"dead",especie:"human",genero:"male",pseudonimo:"Sailor, Optimist",saga:"Troy",imagemTentativa:"imagens/polites.png",imagemVitoria:"imagens/polites-vitoria.png"},
-{nome:"Eurylochus",status:"dead",especie:"human",genero:"male",pseudonimo:"Second-in-command",saga:"Troy",imagemTentativa:"imagens/eurylochus.png",imagemVitoria:"imagens/eurylochus-vitoria.png"},
-{nome:"Elpenor",status:"dead",especie:"human",genero:"male",pseudonimo:"Unlucky Sailor",saga:"Ocean",imagemTentativa:"imagens/elpenor.png",imagemVitoria:"imagens/elpenor-vitoria.png"},
-{nome:"Perimedes",status:"dead",especie:"human",genero:"male",pseudonimo:"Warrior of Ithaca",saga:"Ocean",imagemTentativa:"imagens/perimedes.png",imagemVitoria:"imagens/perimedes-vitoria.png"},
+{nome:"Polites",status:"dead",especie:"human",genero:"male",pseudonimo:"Sailor, Optimist, Warrior of Ithaca",saga:"Troy",imagemTentativa:"imagens/polites.png",imagemVitoria:"imagens/polites-vitoria.png"},
+{nome:"Eurylochus",status:"dead",especie:"human",genero:"male",pseudonimo:"Second-in-command, Warrior of Ithaca",saga:"Troy",imagemTentativa:"imagens/eurylochus.png",imagemVitoria:"imagens/eurylochus-vitoria.png"},
+{nome:"Elpenor",status:"dead",especie:"human",genero:"male",pseudonimo:"Unlucky Sailor, Warrior of Ithaca",saga:"Ocean",imagemTentativa:"imagens/elpenor.png",imagemVitoria:"imagens/elpenor-vitoria.png"},
+{nome:"Perimedes",status:"dead",especie:"human",genero:"male",pseudonimo:"Sailor, Warrior of Ithaca",saga:"Ocean",imagemTentativa:"imagens/perimedes.png",imagemVitoria:"imagens/perimedes-vitoria.png"},
 
 // ===== GODS =====
 {nome:"Athena",status:"alive",especie:"god",genero:"female",pseudonimo:"Goddess of Wisdom",saga:"Troy",imagemTentativa:"imagens/athena.png",imagemVitoria:"imagens/athena-vitoria.png"},
 {nome:"Poseidon",status:"alive",especie:"god",genero:"male",pseudonimo:"God of the Sea",saga:"Ocean",imagemTentativa:"imagens/poseidon.png",imagemVitoria:"imagens/poseidon-vitoria.png"},
 {nome:"Zeus",status:"alive",especie:"god",genero:"male",pseudonimo:"King of the Gods",saga:"Troy",imagemTentativa:"imagens/zeus.png",imagemVitoria:"imagens/zeus-vitoria.png"},
-{nome:"Hermes",status:"alive",especie:"god",genero:"male",pseudonimo:"Messenger",saga:"Circe",imagemTentativa:"imagens/hermes.png",imagemVitoria:"imagens/hermes-vitoria.png"},
+{nome:"Hermes",status:"alive",especie:"god",genero:"male",pseudonimo:"Messenger of the Gods",saga:"Circe",imagemTentativa:"imagens/hermes.png",imagemVitoria:"imagens/hermes-vitoria.png"},
 {nome:"Aeolus",status:"alive",especie:"god",genero:"male",pseudonimo:"Lord of the Winds",saga:"Ocean",imagemTentativa:"imagens/aeolus.png",imagemVitoria:"imagens/aeolus-vitoria.png"},
 {nome:"Apollo",status:"alive",especie:"god",genero:"male",pseudonimo:"God of the Sun",saga:"Wisdom",imagemTentativa:"imagens/apolo.png",imagemVitoria:"imagens/apolo-vitoria.png"},
 {nome:"Ares",status:"alive",especie:"god",genero:"male",pseudonimo:"God of War",saga:"Wisdom",imagemTentativa:"imagens/ares.png",imagemVitoria:"imagens/ares-vitoria.png"},
@@ -36,7 +41,8 @@ const personagens=[
 {nome:"Charybdis",status:"alive",especie:"monster",genero:"female",pseudonimo:"Living Whirlpool",saga:"Vengeance",imagemTentativa:"imagens/charybdis.png",imagemVitoria:"imagens/charybdis-vitoria.png"},
 {nome:"Sirens",status:"alive",especie:"monster",genero:"female",pseudonimo:"Sea Singers",saga:"Thunder",imagemTentativa:"imagens/sirens.png",imagemVitoria:"imagens/sirens-vitoria.png"},
 {nome:"Laestrygonians",status:"alive",especie:"monster",genero:"indefinido",pseudonimo:"Giants",saga:"Ocean",imagemTentativa:"imagens/laestrygonians.png",imagemVitoria:"imagens/laestrygonians-vitoria.png"},
-{nome:"Lotus Eaters",status:"alive",especie:"monster",genero:"indefinido",pseudonimo:"Lotus Eaters",saga:"Troy",imagemTentativa:"imagens/winions.png",imagemVitoria:"imagens/winions-vitoria.png"},
+{nome:"Winion",status:"alive",especie:"monster",genero:"indefinido",pseudonimo:"Lotus Eaters",saga:"Troy",imagemTentativa:"imagens/winions.png",imagemVitoria:"imagens/winions-vitoria.png"},
+{nome:"Princess Winion",status:"alive",especie:"monster",genero:"indefinido",pseudonimo:"Princess",saga:"Troy",imagemTentativa:"imagens/winions.png",imagemVitoria:"imagens/winions-vitoria.png"},
 
 // ===== OTHERS =====
 {nome:"Tiresias",status:"dead",especie:"human",genero:"male",pseudonimo:"Prophet",saga:"Underworld",imagemTentativa:"imagens/tiresias.png",imagemVitoria:"imagens/tiresias-vitoria.png"},
